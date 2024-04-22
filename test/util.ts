@@ -18,7 +18,10 @@ export function runLuaCode(code: string): Promise<boolean> {
     process.stderr.on('data', (data: Buffer) => {
       const str = data.toString();
 
-      return reject(new Error(str));
+      return reject({
+        err: new Error(str),
+        code,
+      });
     });
 
     process.on('close', exitCode => {

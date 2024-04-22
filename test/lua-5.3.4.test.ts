@@ -20,9 +20,9 @@ function generateLuaTest(name: string) {
   it(name + ' can still pass tests after being formatted', async () => {
     const bootstrap =
       '\
-            _soft = true \
-            _port = true \
-            _nomsg = true\n';
+_soft = true \
+_port = true \
+_nomsg = true\n';
 
     const result = await readLuaTest(name)
       .then(contents => bootstrap + contents)
