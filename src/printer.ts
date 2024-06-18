@@ -115,6 +115,10 @@ function printStringLiteral(path: FastPath, options: Options): Doc {
     );
   }
 
+  if (typeof options.quotemark === 'undefined') {
+    return literal.raw;
+  }
+
   // Ignore raw string literals as they have no leading/trailing quotes.
   if (literal.raw.startsWith('[[') || literal.raw.startsWith('[=')) {
     return literal.raw;
@@ -152,7 +156,7 @@ function printNodeNoParens(path: FastPath, options: Options, print: PrintFn) {
 
   const parts: Doc[] = [];
 
-  const node = value as luaparse.Node;
+  let node = value as any;
 
   switch (node.type) {
     case 'Chunk':
@@ -275,7 +279,7 @@ function printNodeNoParens(path: FastPath, options: Options, print: PrintFn) {
       //
       // There's probably a much better way of doing this, but it works for now.
       const canBreakLine = node.init.some(
-        n =>
+        (n: any) =>
           n != null &&
           n.type !== 'TableConstructorExpression' &&
           n.type !== 'FunctionDeclaration',
@@ -463,6 +467,11 @@ function printNodeNoParens(path: FastPath, options: Options, print: PrintFn) {
       return node.name;
 
     // Expressions
+    case 'ParenthesizedExpression':
+      const temp = path.call(print, 'expression');
+      parts.push(temp);
+
+      return concat(parts);
     case 'BinaryExpression':
     case 'LogicalExpression':
       const parent = path.getParent() as luaparse.Node;

@@ -1,0 +1,68 @@
+diff --git a/node_modules/luaparse/bin/luaparse b/node_modules/luaparse/bin/luaparse
+index 41c0d84..55573fe 100644
+--- a/node_modules/luaparse/bin/luaparse
++++ b/node_modules/luaparse/bin/luaparse
+@@ -12,6 +12,7 @@ var fs = require('fs')
+   , beautify = false
+   , quiet = false
+   , verbose = false
++  , parens = false
+   , input = ''
+   , options = {}
+   , snippets = [];
+@@ -23,6 +24,7 @@ function usage() {
+     , "  -c|--code [code]   parse code snippet"
+     , "  -f|--file [file]   parse from file"
+     , "  -b|--beautify      output an indenteted AST"
++    , "  -p|--parens preserve parenthesis in the source code"
+     , "  --[no]-comments    store comments. defaults to true"
+     , "  --[no]-scope       store variable scope. defaults to false"
+     , "  --[no]-locations   store location data on syntax nodes. defaults to false"
+@@ -52,6 +54,9 @@ for (var i = 0, l = args.length; i < l; i++) {
+       case 'b': case 'beautify':
+         beautify = true;
+         continue;
++        case 'p': case 'parens':
++        options.preserveParens = true;
++        continue;
+       case 'q': case 'quiet':
+         quiet = true;
+         continue;
+diff --git a/node_modules/luaparse/luaparse.js b/node_modules/luaparse/luaparse.js
+index b7616db..a69c456 100644
+--- a/node_modules/luaparse/luaparse.js
++++ b/node_modules/luaparse/luaparse.js
+@@ -88,6 +88,8 @@
+     , luaVersion: '5.1'
+     // Encoding mode: how to interpret code units higher than U+007F in input
+     , encodingMode: 'none'
++    // Preserve parenthesis in the resulting tree.
++    , preserveParens: false
+   };
+ 
+   function encodeUTF8(codepoint, highMask) {
+@@ -233,6 +235,13 @@
+       };
+     }
+ 
++    , parenthesizedExpression: function(expression) {
++      return {
++          type: 'ParenthesizedExpression'
++        , expression: expression
++      };
++    }
++
+     , breakStatement: function() {
+       return {
+           type: 'BreakStatement'
+@@ -2515,8 +2524,10 @@
+       // Set the parent scope.
+       if (options.scope) attachScope(base, scopeHasName(name));
+     } else if (consume('(')) {
++      if (options.preserveParens ||true) pushLocation(marker);
+       base = parseExpectedExpression(flowContext);
+       expect(')');
++      if (options.preserveParens ||true) base = finishNode(ast.parenthesizedExpression(base));
+     } else {
+       return null;
+     }

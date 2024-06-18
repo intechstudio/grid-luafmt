@@ -111,6 +111,9 @@ export class FastPath {
       case 'TableCallExpression':
       case 'StringCallExpression':
         inParens = value.inParens || false;
+        break;
+      case 'ParenthesizedExpression':
+        inParens = true;
     }
 
     if (parent) {

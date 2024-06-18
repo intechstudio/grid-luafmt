@@ -2,7 +2,7 @@
   "files.exclude": {
     "**/.git": true,
     "**/out": true,
-    "**/node_modules": true
+    "**/node_modules": false
   },
   "search.exclude": {
     "**/node_modules": true,

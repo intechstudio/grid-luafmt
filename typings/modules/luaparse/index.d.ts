@@ -50,6 +50,7 @@ declare module 'luaparse' {
 
   type Node =
     | Chunk
+    | ParenthesizedExpression
     | Expression
     | Statement
     | TableKey
@@ -147,6 +148,12 @@ declare module 'luaparse' {
     readonly comments: Comment[];
     readonly globals?: Expression[];
   }
+
+  export interface ParenthesizedExpression extends ExpAdditional {
+    readonly type: 'ParenthesizedExpression';
+    readonly expression: Expression;
+  }
+
   export interface Identifier extends ExpAdditional {
     readonly type: 'Identifier';
     readonly name: string;

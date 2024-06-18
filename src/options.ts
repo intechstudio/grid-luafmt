@@ -1,4 +1,4 @@
-export type Quotemark = 'single' | 'double';
+export type Quotemark = 'single' | 'double' | undefined;
 export enum WriteMode {
   StdOut = 'stdout',
   Replace = 'replace',
@@ -23,7 +23,7 @@ export const defaultOptions: Options = {
   indentCount: 4,
   useTabs: false,
   linebreakMultipleAssignments: false,
-  quotemark: 'double',
+  quotemark: undefined,
   writeMode: WriteMode.StdOut,
 };
 
