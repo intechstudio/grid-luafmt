@@ -1,6 +1,6 @@
 {
   "name": "grid-lua-fmt",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "description": "Format Lua code",
   "keywords": [
     "lua",
