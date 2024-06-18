@@ -1,6 +1,6 @@
 {
   "name": "lua-fmt",
-  "version": "2.6.1",
+  "version": "2.6.2",
   "description": "Format Lua code",
   "keywords": [
     "lua",
