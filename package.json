@@ -1,6 +1,6 @@
 {
   "name": "lua-fmt",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "description": "Format Lua code",
   "keywords": [
     "lua",
@@ -19,10 +19,7 @@
   },
   "license": "MIT",
   "author": "Expo",
-  "main": "dist/index.cjs",
-  "bin": {
-    "luafmt": "dist/luafmt.cjs"
-  },
+  "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
   "exports": {
@@ -32,6 +29,9 @@
       "default": "./dist/index.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build:ts": "tsc --emitDeclarationOnly",
     "build:bin": "esbuild src/bin/luafmt.ts --minify --bundle --packages=external --sourcemap --outfile=dist/luafmt.cjs --format=cjs",
