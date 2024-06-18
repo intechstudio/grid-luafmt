@@ -1,5 +1,6 @@
 {
-  "name": "lua-fmt",
+
+  "name": "grid-lua-fmt",
   "version": "2.6.3",
   "description": "Format Lua code",
   "keywords": [
@@ -8,14 +9,10 @@
     "lua-fmt",
     "formatter"
   ],
-  "homepage": "https://github.com/trixnz/lua-fmt",
-  "bugs": {
-    "url": "https://codeberg.org/Expo/lua-fmt/issues",
-    "email": "lua-fmt@breadhub.cc"
-  },
+  "homepage": "https://github.com/intechstudio/lua-fmt",
   "repository": {
     "type": "git",
-    "url": "https://codeberg.org/Expo/lua-fmt.git"
+    "url": "https://github.com/intechstudio/lua-fmt"
   },
   "license": "MIT",
   "author": "Expo",
