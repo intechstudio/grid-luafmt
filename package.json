@@ -1,5 +1,4 @@
 {
-
   "name": "grid-lua-fmt",
   "version": "2.6.3",
   "description": "Format Lua code",
@@ -37,7 +36,9 @@
     "build": "npx patch-package && rollup -c",
     "dev": "nodemon -w src -e ts --exec \"pnpm build\"",
     "test": "jest",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "prepack": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",
