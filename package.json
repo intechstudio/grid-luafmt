@@ -1,5 +1,5 @@
 {
-  "name": "grid-lua-fmt",
+  "name": "@intechstudio/grid-luafmt",
   "version": "2.6.5",
   "description": "Format Lua code",
   "type": "module",
