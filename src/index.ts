@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV === 'development') {
-  require('source-map-support').install();
-}
-
 import { attachComments, injectShebang } from './comments';
 import { buildDocFromAst } from './printer';
 import { printDocToString } from './docPrinter';
